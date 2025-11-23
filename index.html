@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document Verification Payment - Rs. 2,500</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f6fafd; }
+        .container {
+            max-width: 400px; margin: 60px auto; background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); border-radius: 8px; padding: 30px;
+        }
+        .heading { text-align: center; font-size: 1.5em; margin-bottom: 10px; color: #006ac6; }
+        .desc { text-align: center; font-size: 1em; margin-bottom: 20px; color: #333; }
+        .amount { text-align: center; font-size: 1.2em; font-weight: bold; margin-bottom: 30px; color: #1a7b21; }
+        .btn-pay { display: block; width: 100%; padding: 12px 0; font-size: 1.1em; background: #0086e6;
+            color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+        .details { font-size: 0.95em; color: #666; margin-bottom: 30px; }
+        .note { font-size: 0.9em; color: #606060; margin-top: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">Document Verification Payment</div>
+        <div class="desc">Please pay the verification fee to proceed with your application for the private job.</div>
+        <div class="amount">Amount: ₹2,500</div>
+        <button class="btn-pay" id="rzp-button">Pay with Razorpay</button>
+        <div class="details">
+            <ul>
+                <li>Verification fee is non-refundable.</li>
+                <li>You will receive a receipt and confirmation after payment.</li>
+                <li>For assistance, contact: support@example.com</li>
+            </ul>
+        </div>
+        <div class="note">Secure payment | Your information remains confidential.</div>
+    </div>
+    <script>
+    var options = {
+        "key": "YOUR_RAZORPAY_KEY_HERE", // Enter your Razorpay Key ID
+        "amount": "250000", // Amount is in paise (Rs 2,500 x 100)
+        "currency": "INR",
+        "name": "Document Verification",
+        "description": "Verification fee for private job application",
+        "image": "https://your-logo-url.com/logo.png",
+        "handler": function (response){
+            alert("Payment Success! Payment ID: " + response.razorpay_payment_id);
+        },
+        "prefill": {
+            "name": "",
+            "email": "",
+            "contact": ""
+        },
+        "theme": {
+            "color": "#006ac6"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+    </script>
+</body>
+</html>
